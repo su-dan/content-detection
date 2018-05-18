@@ -1,0 +1,25 @@
+
+.App-header {
+  background-color: #222;
+  height: 120px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 30px;
+  text-align: center;
+  color: #fff;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.content-wrapper {
+  padding: 20px 100px;
+}
+.submit-btn-wrapper {
+  text-align: center;
+  margin-top: 10px;
+}
