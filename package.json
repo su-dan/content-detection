@@ -15,5 +15,5 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://222.182.101.36:8080"
+  "proxy": "http://223.104.25.66:8080"
 }

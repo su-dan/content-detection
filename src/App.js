@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import 'antd/dist/antd.css';
 import axios from 'axios';
@@ -11,21 +10,32 @@ class App extends Component {
     super();
     this.state = {
       content: '',
-      detectionResult: ''
+      resultContent: '',
+      keyColor: 'red'
     }
+    this.replaceContent = '';
   }
   contentAreaHandler(e) {
     this.setState({
-      content: e.target.value
+      content: e.target.value,
+      resultContent: e.target.value
     });
+    this.replaceContent = e.target.value;
   }
   submitHandler() {
+    
     axios.get(`/ce?content=${this.state.content}`)
       .then((res) => {
         console.log(res);
         if (res.status === 200 && res.statusText === "OK") {
-          this.setState({
-            detectionResult: res.data
+          
+          res.data && res.data.forEach((item, index) => {
+            this.replaceContent = this.replaceContent.replace(item, `<span style=color:${this.state.keyColor}>${item}</span>`)
+            this.setState((prevState) => {
+              return { 
+                resultContent: this.replaceContent
+              }
+            });
           });
         }
       })
@@ -50,7 +60,8 @@ class App extends Component {
           </p>
           <p>检测结果：</p>
           <p 
-            style={{fontSize: "20px", textIndent: "2"}}>{this.state.detectionResult}</p>
+            style={{fontSize: "20px", textIndent: "2"}}
+            dangerouslySetInnerHTML={{ __html: this.state.resultContent }} />
         </div>
       </div>
     );
