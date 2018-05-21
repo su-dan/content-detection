@@ -23,22 +23,29 @@ class App extends Component {
     this.replaceContent = e.target.value;
   }
   submitHandler() {
-    
-    axios.get(`/ce?content=${this.state.content}`)
-      .then((res) => {
-        console.log(res);
-        if (res.status === 200 && res.statusText === "OK") {
-          
-          res.data && res.data.forEach((item, index) => {
-            this.replaceContent = this.replaceContent.replace(item, `<span style=color:${this.state.keyColor}>${item}</span>`)
-            this.setState((prevState) => {
-              return { 
-                resultContent: this.replaceContent
-              }
-            });
-          });
+    ['第一', '最好'].forEach((item, index) => {
+      this.replaceContent = this.replaceContent.replace(new RegExp(item, 'g'), `<span style=color:${this.state.keyColor}>${item}</span>`)
+      this.setState((prevState) => {
+        return { 
+          resultContent: this.replaceContent
         }
-      })
+      });
+    });
+    // axios.get(`/ce?content=${this.state.content}`)
+    //   .then((res) => {
+    //     console.log(res);
+    //     if (res.status === 200 && res.statusText === "OK") {
+          
+    //       res.data && res.data.forEach((item, index) => {
+    //         this.replaceContent = this.replaceContent.replace(item, `<span style=color:${this.state.keyColor}>${item}</span>`)
+    //         this.setState((prevState) => {
+    //           return { 
+    //             resultContent: this.replaceContent
+    //           }
+    //         });
+    //       });
+    //     }
+    //   })
   }
   render() {
     return (
